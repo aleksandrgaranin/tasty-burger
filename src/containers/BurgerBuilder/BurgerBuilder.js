@@ -92,8 +92,7 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
         return (            
-            <Aux>
-                
+            <Aux>                
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCanselHandler}> 
                     <OrderSummary 
                         ingredients={this.state.ingredients}

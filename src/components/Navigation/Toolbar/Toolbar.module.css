@@ -17,6 +17,17 @@
     height: 100%;
 
 }
+.Toolbar button{
+    background-color: transparent;
+    border: none;
+    color: #5C9210;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
 
 .Logo{
     height: 80%;
