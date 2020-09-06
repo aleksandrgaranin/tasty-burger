@@ -3,6 +3,7 @@ import Layout from './hoc/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 import Chackout from './containers/Checkout/Checkout';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   // To tes componentWillUnmount
@@ -20,8 +21,11 @@ class App extends Component {
     return  (
     <div>
       <Layout>
-        <BurgerBuilder/>
-        <Chackout/>
+        <Switch> 
+          <Route path="/chackout" component={Chackout}/>
+          <Route path= "/" component={BurgerBuilder}/>
+        </Switch>
+       
       </Layout>
     </div>
     );
