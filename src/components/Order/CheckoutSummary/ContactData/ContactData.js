@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+
 import Button from '../../../UI/Button/Button';
+import Spinner from '../../../UI/Spinner/Spinner';
+
 import classes from './ContactData.module.css';
+
 import axios from '../../../../axios-orders';
 
 
@@ -35,21 +39,32 @@ class ContactData extends Component {
             }
         }
         axios.post('/orders.json', order)
-            .then(response => { this.setState({ loading: false, purchasing: false })})
-            .catch( error =>  { this.setState({ loading: false, purchasing: false })});
+            .then(response => { 
+                this.setState({ loading: false })
+                this.props.history.push('/');
+            })
+            .catch( error =>  { 
+                this.setState({ loading: false })
+            });
     }
 
     render () {
-        return (
-            <div className={classes.ContactData}>
-                <h4>Enter your Contact Data</h4>
-                <form className={classes.Form}>
+        let form = (
+            <form className={classes.Form}>
                     <input className={classes.Input}type="text" name="name" placeholder="Your Name"/>
                     <input className={classes.Input}type="email" name="email" placeholder="Your E-mail"/>
                     <input className={classes.Input}type="text" name="street" placeholder="Street"/>
                     <input className={classes.Input}type="text" name="postal" placeholder="Postal Code"/>
                     <Button btnType="Success" clicked={this.orderHendler}>ORDER</Button>
                 </form>
+        );
+        if(this.state.loading){
+            form = <Spinner/>;
+        }
+        return (
+            <div className={classes.ContactData}>
+                <h4>Enter your Contact Data</h4>
+                {form}
             </div>
         )
     }
