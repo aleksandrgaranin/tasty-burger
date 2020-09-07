@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import Button from '../../../UI/Button/Button'
-import classes from './ContactData.module.css'
+import Button from '../../../UI/Button/Button';
+import classes from './ContactData.module.css';
+import axios from '../../../../axios-orders';
 
 
 class ContactData extends Component {
@@ -10,8 +11,34 @@ class ContactData extends Component {
         address: {
             street: '',
             postalCode: ''
-        }
+        },
+        loading: false
     }
+
+    orderHendler = (event) => {
+        event.preventDefault(); //important this line prevent reloading the page
+        console.log(this.props);
+
+        this.setState({loading: true});
+        const order = {
+            ingredients: this.props.ingredients,
+            price: this.props.price,
+            customer: {
+                name: 'Aleksandr Garanin',
+                address:{
+                    street:'Teststreet 1',
+                    zipCode: '12412',
+                    country: 'USA'
+                },
+                email: 'text@text.com',
+                delivery: 'fastest'
+            }
+        }
+        axios.post('/orders.json', order)
+            .then(response => { this.setState({ loading: false, purchasing: false })})
+            .catch( error =>  { this.setState({ loading: false, purchasing: false })});
+    }
+
     render () {
         return (
             <div className={classes.ContactData}>
@@ -21,7 +48,7 @@ class ContactData extends Component {
                     <input className={classes.Input}type="email" name="email" placeholder="Your E-mail"/>
                     <input className={classes.Input}type="text" name="street" placeholder="Street"/>
                     <input className={classes.Input}type="text" name="postal" placeholder="Postal Code"/>
-                    <Button btnType="Success">ORDER</Button>
+                    <Button btnType="Success" clicked={this.orderHendler}>ORDER</Button>
                 </form>
             </div>
         )
