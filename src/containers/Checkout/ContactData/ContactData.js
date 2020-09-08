@@ -60,7 +60,7 @@ class ContactData extends Component {
                         {value: 'chipest', displayValue: 'Chipest'}
                     ]
                 },
-                value: ''
+                value: 'fastest'
             },        
         },
         loading: false
@@ -71,9 +71,14 @@ class ContactData extends Component {
         console.log(this.props);
 
         this.setState({loading: true});
+        const formData = {}
+        for (let formElementIdentifier in this.state.orderForm){
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
+        }
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.price
+            price: this.props.price,
+            orderData: formData
         }
         axios.post('/orders.json', order)
             .then(response => { 
@@ -108,7 +113,7 @@ class ContactData extends Component {
         }
 
         let form = (
-            <form className={classes.Form}>
+            <form className={classes.Form} onSubmit={this.orderHendler}>
                     
                     {formElementsArrey.map(formElement => (
                         <Input 
@@ -118,7 +123,7 @@ class ContactData extends Component {
                             value={formElement.config.value}
                             changed={(event)=> this.inputChangedHandler(event, formElement.id)}/>
                     ))}
-                    <Button btnType="Success" clicked={this.orderHendler}>ORDER</Button>
+                    <Button btnType="Success">ORDER</Button>
                 </form>
         );
         if(this.state.loading){
