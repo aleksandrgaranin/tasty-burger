@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 
-import Button from '../../../UI/Button/Button';
-import Spinner from '../../../UI/Spinner/Spinner';
+import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
 
 import classes from './ContactData.module.css';
 
-import axios from '../../../../axios-orders';
+import axios from '../../../axios-orders';
 
 
 class ContactData extends Component {
@@ -51,10 +52,10 @@ class ContactData extends Component {
     render () {
         let form = (
             <form className={classes.Form}>
-                    <input className={classes.Input}type="text" name="name" placeholder="Your Name"/>
-                    <input className={classes.Input}type="email" name="email" placeholder="Your E-mail"/>
-                    <input className={classes.Input}type="text" name="street" placeholder="Street"/>
-                    <input className={classes.Input}type="text" name="postal" placeholder="Postal Code"/>
+                    <Input inputtype="input" type="text" name="name" placeholder="Your Name"/>
+                    <Input inputtype="input" type="email" name="email" placeholder="Your E-mail"/>
+                    <Input inputtype="input" type="text" name="street" placeholder="Street"/>
+                    <Input inputtype="input" type="text" name="postal" placeholder="Postal Code"/>
                     <Button btnType="Success" clicked={this.orderHendler}>ORDER</Button>
                 </form>
         );

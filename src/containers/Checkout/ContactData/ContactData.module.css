@@ -8,12 +8,6 @@
     box-sizing: border-box;
 }
 
-.Input{
-    display: block;
-    text-align: center;
-    
-}
-
 .Form {
     display: flex;
     flex-flow: column;
